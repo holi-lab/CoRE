@@ -29,7 +29,10 @@ pip install -r requirements.txt
 ## Context Robust Knowledge Editing (CoRE)
 
 ### Overview
-![image](https://github.com/user-attachments/assets/8c565e21-90cd-4b06-87f2-3d605b56994b)
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8c565e21-90cd-4b06-87f2-3d605b56994b" alt="CoRE Overview" width="400" />
+</p>
 
 TBD
 
