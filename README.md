@@ -1,5 +1,6 @@
 # Context Robust Knowledge Editing for Language Models
-This repository provides an implementation of Context Robust Knowledge Editing (CoRE) on auto-regressive transformers (GPU-only) and Contextual Hop Editing Dataset (CHED) dataset for evaluating context robustness of knowledge editing methods.
+This repository provides an implementation of Context Robust Knowledge Editing (CoRE) on auto-regressive transformers and the Contextual Hop Editing Dataset (CHED) for evaluating context robustness of knowledge editing methods.  
+Our work was accepted to ACL 2025 Findings.  
 Feel free to open an issue if you find any problems; we are actively developing this repository and will monitor tickets closely.
 
 ## Table of Contents
@@ -34,10 +35,42 @@ pip install -r requirements.txt
   <img src="https://github.com/user-attachments/assets/8c565e21-90cd-4b06-87f2-3d605b56994b" alt="CoRE Overview" width="400" />
 </p>
 
-TBD
+### Hyperparameters
 
-### hperparameters
-TBD
+```yaml
+alg_name: CORE
+attn_module_tmp: model.layers.{}.self_attn
+clamp_norm_factor: 3
+device: 0
+fact_token: subject_last
+kl_factor: 0.0625
+layer_module_tmp: model.layers.{}
+layer_selection: all
+layers:
+  - 3
+lm_head_module: lm_head
+ln_f_module: model.norm
+mlp_module_tmp: model.layers.{}.mlp
+model_name: meta-llama/Meta-Llama-3-8B-Instruct
+model_parallel: true
+mom2_adjustment: true
+mom2_dataset: wikipedia
+mom2_dtype: float32
+mom2_n_samples: 100000
+mom2_update_weight: 15000
+rewrite_module_tmp: model.layers.{}.mlp.down_proj
+stats_dir: /data1/home/dellaanima/EasyEdit/stats
+v_loss_layer: 31
+v_lr: 0.5
+v_num_grad_steps: 25
+v_weight_decay: 0.001
+batch_size: 3
+
+# CORE-specific additional hyperparameters introduced by the CoRE methodology
+reg_lambda: 0.04
+context: all
+ctx_num: 15
+layer_range: 28
 
 
 ## CHED Dataset
@@ -125,29 +158,53 @@ An example in `CHED` is shown below.
 
 ```
 
-
+````markdown
 ## Editing and Evaluation
 
 ### Quick Start
-```python
-# TBD: Basic usage example
 
-# ... example usage
-```
+To apply the CORE editing method to a batch of 1,000 knowledge editing instances, run:
+
+```bash
+python edit_eval/edit_eval.py \
+  --editing_method CORE \
+  --hparams_dir /data1/home/dellaanima/CoRE/EasyEdit/hparams/CORE/llama3-8b-Instruct.yaml \
+  --edit_data_dir /data1/home/dellaanima/CoRE/data/CHED.json \
+  --ds_size 1000 \
+  --start_sample 1 \
+  --end_sample 1000 \
+  --save_dir /data1/home/dellaanima/CoRE/edit_eval/output \
+  --cuda_device 1 \
+  --eval_max_length 50 \
+  --model_name meta-llama/Meta-Llama-3-8B-Instruct
+````
+
+This will load the specified hyperparameters, process samples 1–1000 from the CHED dataset, perform the edit, and evaluate the results.
 
 ### Evaluation Metrics
-TBD: 
 
+When the run finishes, you’ll find a JSON file in your `save_dir` with overall and per-category editing statistics. Example:
 
-## Experimental Results
+```json
+{
+  "AVG_editing_success": 0.8225624310618719,
+  "total_editing_time": 10805.295027017593,
+  "total_samples": 1000,
+  "AVG_SRS_REWRITE": 15.312,
+  "REWRITE/editing_success": 0.905,
+  "REPHRASE/editing_success": 0.776,
+  "SBJ_HOP/editing_success": 0.8832262353201862,
+  "OBJ_OLD_HOP/editing_success": 0.7972294719935756,
+  "OBJ_NEW_HOP/editing_success": 0.9030437411812134,
+  "SBJ/editing_success": 0.874,
+  "OBJ_OLD/editing_success": 0.5152,
+  "OBJ_NEW/editing_success": 0.9268
+}
 
-### Analysis 
-TBD: 
-
-## How to Cite
-
-If you use CoRE in your research, please cite our paper:
-
-```bibtex
 
 ```
+```
+
+
+## How to Cite
+TBD
