@@ -76,8 +76,8 @@ An example in `CHED` is shown below.
   "fact_knowledge": "Birmingham",
   "edited_knowledge": "Philadelphia",
   "relation_id": "P740",
-  "rephrased_prompt": "In Wardha he came in  close contact with Mahatma Gandhi. Anaal Nathrakh was founded in"
-  "locality_prompt": "City of Birmingham Symphony Orchestra, that was created in"
+  "rephrased_prompt": "In Wardha he came in  close contact with Mahatma Gandhi. Anaal Nathrakh was founded in",
+  "locality_prompt": "City of Birmingham Symphony Orchestra, that was created in",
   "locality_ground_truth: "Birmingham,
   "sbj_hop_word: [
     "Back on Black Records",
