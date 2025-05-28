@@ -1,4 +1,3 @@
-````markdown
 # Context Robust Knowledge Editing for Language Models
 
 This repository provides an implementation of Context Robust Knowledge Editing (CoRE) on auto-regressive transformers and the Contextual Hop Editing Dataset (CHED) for evaluating context robustness of knowledge editing methods.  
