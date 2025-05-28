@@ -1,31 +1,30 @@
+````markdown
 # Context Robust Knowledge Editing for Language Models
+
 This repository provides an implementation of Context Robust Knowledge Editing (CoRE) on auto-regressive transformers and the Contextual Hop Editing Dataset (CHED) for evaluating context robustness of knowledge editing methods.  
 Our work was accepted to ACL 2025 Findings.  
 Feel free to open an issue if you find any problems; we are actively developing this repository and will monitor tickets closely.
 
 ## Table of Contents
 1. [Requirements](#requirements)
-2. [Context Robust Knowledge Editing (CoRE)](#context-robust-knowledge-editing-core-1)
+2. [Context Robust Knowledge Editing (CoRE)](#context-robust-knowledge-editing-core)
 3. [CHED Dataset](#ched-dataset)
 4. [Editing and Evaluation](#editing-and-evaluation)
 5. [Experimental Results](#experimental-results)
 6. [How to Cite](#how-to-cite)
 
-
 ## Requirements
 
 ### 🔧 Pip Installation
-**Note: Please use Python 3.9+ for CoRE** To get started, simply install conda and run:
 
-To get started, simply install conda and run:
+> **Note:** Please use Python 3.9+ for CoRE.
 
 ```shell
 git clone https://github.com/holi-lab/CoRE.git
 conda create -n CoRE python=3.9.7
 conda activate CoRE
 pip install -r requirements.txt
-```
-
+````
 
 ## Context Robust Knowledge Editing (CoRE)
 
@@ -71,36 +70,29 @@ reg_lambda: 0.04
 context: all
 ctx_num: 15
 layer_range: 28
-
+```
 
 ## CHED Dataset
 
 ### Dataset Description
-![image](https://github.com/user-attachments/assets/81a28698-0460-4d30-acd4-6bca227bf7a2)
-The Contextual Hop Editing Dataset (CHED) is designed to evaluate the context robustness of knowledge editing methods.
 
-The dataset is included in `data/`.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/81a28698-0460-4d30-acd4-6bca227bf7a2" alt="CHED Dataset" width="400" />
+</p>
+
+The Contextual Hop Editing Dataset (CHED) is designed to evaluate the context robustness of knowledge editing methods. The dataset is included in `data/`.
 
 ### Dataset Statistics
 
-`CHED` contains 21,782 instances used to evaluate knowledge editing methods in the presence of preceding context, including:
-- 21,782 fact triplets
-- 314,385 hop-word prefix context sentences
-- 326,730 fact prefix context sentences
-
-<!--
-TBD: 
-- Number of samples
-- Data splits
-- Task types
-- Evaluation scenarios
--->
+* **21,782** fact triplets
+* **314,385** hop-word prefix context sentences
+* **326,730** fact prefix context sentences
 
 ### Data Format
-The dataset is saved as a list of dicts, each of which represents a data instance. 
-An example in `CHED` is shown below.
 
-```
+The dataset is saved as a list of dictionaries; each dictionary represents one data instance. An example entry from `CHED.json`:
+
+```json
 {
   "case_id": "6",
   "counterfact_id": "6",
@@ -109,10 +101,10 @@ An example in `CHED` is shown below.
   "fact_knowledge": "Birmingham",
   "edited_knowledge": "Philadelphia",
   "relation_id": "P740",
-  "rephrased_prompt": "In Wardha he came in  close contact with Mahatma Gandhi. Anaal Nathrakh was founded in",
+  "rephrased_prompt": "In Wardha he came in close contact with Mahatma Gandhi. Anaal Nathrakh was founded in",
   "locality_prompt": "City of Birmingham Symphony Orchestra, that was created in",
-  "locality_ground_truth: "Birmingham,
-  "sbj_hop_word: [
+  "locality_ground_truth": "Birmingham",
+  "sbj_hop_word": [
     "Back on Black Records",
     "black metal",
     "Season of Mist",
@@ -126,7 +118,7 @@ An example in `CHED` is shown below.
     "GBBHM",
     "West Midlands"
   ],
-  "obj_new_hop_word: [
+  "obj_new_hop_word": [
     "Darby",
     "Jim Kenney",
     "Riverton",
@@ -155,15 +147,13 @@ An example in `CHED` is shown below.
     "Lower Moreland Township features several parks and recreational facilities."
   ]
 }
-
 ```
 
-````markdown
 ## Editing and Evaluation
 
 ### Quick Start
 
-To apply the CORE editing method to a batch of 1,000 knowledge editing instances, run:
+To apply the CORE editing method to a batch of 1,000 knowledge instances, run:
 
 ```bash
 python edit_eval/edit_eval.py \
@@ -177,7 +167,7 @@ python edit_eval/edit_eval.py \
   --cuda_device 1 \
   --eval_max_length 50 \
   --model_name meta-llama/Meta-Llama-3-8B-Instruct
-````
+```
 
 This will load the specified hyperparameters, process samples 1–1000 from the CHED dataset, perform the edit, and evaluate the results.
 
@@ -200,11 +190,15 @@ When the run finishes, you’ll find a JSON file in your `save_dir` with overall
   "OBJ_OLD/editing_success": 0.5152,
   "OBJ_NEW/editing_success": 0.9268
 }
-
-
-```
 ```
 
+## Experimental Results
+
+TBD
 
 ## How to Cite
+
 TBD
+
+```
+```
