@@ -46,15 +46,84 @@ TBD
 ![image](https://github.com/user-attachments/assets/81a28698-0460-4d30-acd4-6bca227bf7a2)
 The Contextual Hop Editing Dataset (CHED) is designed to evaluate the context robustness of knowledge editing methods.
 
+The dataset is included in `data/`.
+
 ### Dataset Statistics
+
+`CHED` contains 21,782 instances used to evaluate knowledge editing methods in the presence of preceding context, including:
+- 21,782 fact triplets
+- 314,385 hop-word prefix context sentences
+- 326,730 fact prefix context sentences
+
+<!--
 TBD: 
 - Number of samples
 - Data splits
 - Task types
 - Evaluation scenarios
+-->
 
 ### Data Format
-TBD: Description of data structure and format
+The dataset is saved as a list of dicts, each of which represents a data instance. 
+An example in `CHED` is shown below.
+
+```
+{
+  "case_id": "6",
+  "counterfact_id": "6",
+  "prompt": "{}, that was created in",
+  "subject": "Anaal Nathrakh",
+  "fact_knowledge": "Birmingham",
+  "edited_knowledge": "Philadelphia",
+  "relation_id": "P740",
+  "rephrased_prompt": "In Wardha he came in  close contact with Mahatma Gandhi. Anaal Nathrakh was founded in"
+  "locality_prompt": "City of Birmingham Symphony Orchestra, that was created in"
+  "locality_ground_truth: "Birmingham,
+  "sbj_hop_word: [
+    "Back on Black Records",
+    "black metal",
+    "Season of Mist",
+    "Candlelight Records",
+    "United Kingdom"
+  ],
+  "obj_old_hop_word": [
+    "Yvonne Mosquito",
+    "River Tame",
+    "Changchun",
+    "GBBHM",
+    "West Midlands"
+  ],
+  "obj_new_hop_word: [
+    "Darby",
+    "Jim Kenney",
+    "Riverton",
+    "USPHL",
+    "Lower Moreland Township"
+  ],
+  "sbj_hop_sentence": [
+    "The label was founded to support underground artists, Back on Black Records.",
+    "This genre is characterized by its intense sound and themes, black metal.",
+    "The label expanded its roster significantly over the years, Season of Mist.",
+    "Artists under this label have gained international recognition, Candlelight Records.",
+    "The music scene in that area has a distinct identity, United Kingdom."
+  ],
+  "obj_old_hop_sentence": [
+    "Yvonne Mosquito first appeared in various documentaries discussing tropical diseases.",
+    "Residents often enjoy the beauty of the River Tame throughout the year.",
+    "Changchun is famous for its advanced automotive industry in Asia.",
+    "The recent events highlighted the importance of GBBHM initiatives for urban development.",
+    "Numerous attractions can be found in the West Midlands region."
+  ],
+  "obj_new_hop_sentence": [
+    "The quaint town of Darby is known for its friendly community.",
+    "Under Mayor Jim Kenney, the city has seen significant changes.",
+    "Located near the river, Riverton offers beautiful waterfront views.",
+    "The USPHL provides a platform for aspiring hockey players to showcase their talent.",
+    "Lower Moreland Township features several parks and recreational facilities."
+  ]
+}
+
+```
 
 
 ## Editing and Evaluation
