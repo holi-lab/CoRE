@@ -2,7 +2,6 @@
 
 This repository provides an implementation of Context Robust Knowledge Editing (CoRE) on auto-regressive transformers and the Contextual Hop Editing Dataset (CHED) for evaluating context robustness of knowledge editing methods.  
 Our work was accepted to ACL 2025 Findings.  
-Feel free to open an issue if you find any problems; we are actively developing this repository and will monitor tickets closely.
 
 ## Table of Contents
 1. [Requirements](#requirements)
@@ -34,9 +33,11 @@ pip install -r requirements.txt
 </p>
 
 ### Hyperparameters
+Example YAML files are located at `/CoRE/EasyEdit/hparams/CORE/`.
 
 ```yaml
 alg_name: CORE
+attn_module_tmp: model.layers.{}.selalg_name: CORE
 attn_module_tmp: model.layers.{}.self_attn
 clamp_norm_factor: 3
 device: 0
@@ -45,7 +46,7 @@ kl_factor: 0.0625
 layer_module_tmp: model.layers.{}
 layer_selection: all
 layers:
-  - 3
+- 3
 lm_head_module: lm_head
 ln_f_module: model.norm
 mlp_module_tmp: model.layers.{}.mlp
@@ -62,13 +63,18 @@ v_loss_layer: 31
 v_lr: 0.5
 v_num_grad_steps: 25
 v_weight_decay: 0.001
-batch_size: 3
+batch_size : 1000
 
-# CORE-specific additional hyperparameters introduced by the CoRE methodology
-reg_lambda: 0.04
-context: all
+
+
+# Additional hyperparameters introduced by the CoRE methodology
+reg_lambda : 0.04
+context: all 
+ctx_len: 10
 ctx_num: 15
+ctx_top_k: 5
 layer_range: 28
+
 ```
 
 ## CHED Dataset
@@ -168,7 +174,7 @@ python edit_eval/edit_eval.py \
   --model_name meta-llama/Meta-Llama-3-8B-Instruct
 ```
 
-This will load the specified hyperparameters, process samples 1–1000 from the CHED dataset, perform the edit, and evaluate the results.
+This will load the specified hyperparameters, process samples from the CHED dataset, perform the edit, and evaluate the results.
 
 ### Evaluation Metrics
 

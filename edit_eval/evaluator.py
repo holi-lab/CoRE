@@ -179,14 +179,12 @@ def evaluate_edited_model(
         )
         samp = SamplingParams(
             max_tokens=max_length,
-            min_tokens=max_length,
             temperature=gen_conf.temperature,
             top_p=gen_conf.top_p,
             top_k=gen_conf.top_k,
             stop=None,
             stop_token_ids=[],
             ignore_eos=True,
-            seed=1234
         )
         for i in tqdm(range(0, len(prompts), batch_size), desc="Processing prompts"):
             batch = prompts[i:i+batch_size]
