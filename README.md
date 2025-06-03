@@ -15,7 +15,9 @@ Our work was accepted to ACL 2025 Findings.
 
 ### 🔧 Pip Installation
 
-> **Note:** Please use Python 3.9+ for CoRE.
+> **Note:** Please use Python 3.9+ for CoRE. We have integrated the EasyEdit open-source framework (https://github.com/zjunlp/EasyEdit) so that our CORE method—as well as other baseline editing approaches—runs directly within EasyEdit. As a result, the `requirements.txt` file includes all of EasyEdit’s original dependencies, plus one additional package (`vllm`) to enable faster inference in our `edit_eval` pipeline.
+
+
 
 ```shell
 git clone https://github.com/holi-lab/CoRE.git
@@ -197,13 +199,19 @@ When the run finishes, you’ll find a JSON file in your `save_dir` with overall
 }
 ```
 
-## Experimental Results
 
-TBD
 
 ## How to Cite
 
-TBD
+If you use CORE, please cite the following:
 
-```
-```
+```bibtex
+@misc{park2025contextrobustknowledgeeditinglanguage,
+  title        = {Context‐Robust Knowledge Editing for Language Models},
+  author       = {Haewon Park and Gyubin Choi and Minjun Kim and Yohan Jo},
+  year         = {2025},
+  eprint       = {2505.23026},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.CL},
+  url          = {https://arxiv.org/abs/2505.23026},
+}

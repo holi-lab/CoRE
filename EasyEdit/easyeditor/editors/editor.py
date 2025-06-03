@@ -259,10 +259,12 @@ class BaseEditor:
                     del self.model.peft_config
                 elif self.alg_name == 'MELO':
                     self.model = edited_model
-                else:
-                    with torch.no_grad():
-                        for k, v in weights_copy.items():
-                            nethook.get_parameter(self.model, k)[...] = v.to(f"cuda:{self.hparams.device}")
+                # To preserve the edited model, you need to comment out the following lines of code:
+                # https://github.com/zjunlp/EasyEdit/issues/465 
+                #else:
+                #    with torch.no_grad():
+                #        for k, v in weights_copy.items():
+                #            nethook.get_parameter(self.model, k)[...] = v.to(f"cuda:{self.hparams.device}")
 
             for i, request in enumerate(record_chunks):
                 chunk_metrics[i]["pre"] = compute_edit_quality(self.model, self.model_name, self.hparams, self.tok, request, self.hparams.device, test_generation=test_generation)
