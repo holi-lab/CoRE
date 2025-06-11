@@ -4,7 +4,7 @@ This repository provides an implementation of Context Robust Knowledge Editing (
 Our work was accepted to ACL 2025 Findings.  
 
 ## 🔔 News
-2025-06-05, 🌟🌟the EasyEdit open-source framework (https://github.com/zjunlp/EasyEdit) has added our method CORE. You can easily use CORE through EasyEdit as well.🌟🌟
+🌟2025-06-05, the EasyEdit open-source framework (https://github.com/zjunlp/EasyEdit) has added our method CORE. You can easily use CORE through EasyEdit as well.
 
 ## Table of Contents
 1. [Requirements](#requirements)
