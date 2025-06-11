@@ -3,6 +3,9 @@
 This repository provides an implementation of Context Robust Knowledge Editing (CoRE) on auto-regressive transformers and the Contextual Hop Editing Dataset (CHED) for evaluating context robustness of knowledge editing methods.  
 Our work was accepted to ACL 2025 Findings.  
 
+## 🔔 News
+2025-06-05, 🌟🌟the EasyEdit open-source framework (https://github.com/zjunlp/EasyEdit) has added our method CORE. You can easily use CORE through EasyEdit as well.”
+
 ## Table of Contents
 1. [Requirements](#requirements)
 2. [Context Robust Knowledge Editing (CoRE)](#context-robust-knowledge-editing-core)
