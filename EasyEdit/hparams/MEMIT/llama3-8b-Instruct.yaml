@@ -1,0 +1,30 @@
+alg_name: MEMIT
+attn_module_tmp: model.layers.{}.self_attn
+clamp_norm_factor: 3
+device: 0
+fact_token: subject_last
+kl_factor: 0.0625
+layer_module_tmp: model.layers.{}
+layer_selection: all
+layers: [4, 5, 6, 7, 8]
+lm_head_module: lm_head
+ln_f_module: model.norm
+mlp_module_tmp: model.layers.{}.mlp
+model_name: meta-llama/Meta-Llama-3-8B-Instruct
+model_parallel: true
+mom2_adjustment: true
+mom2_dataset: wikipedia
+mom2_dtype: float32
+mom2_n_samples: 100000
+mom2_update_weight: 15000
+rewrite_module_tmp: model.layers.{}.mlp.down_proj
+stats_dir: /data1/home/dellaanima/EasyEdit/stats
+v_loss_layer: 31
+v_lr: 0.5
+v_num_grad_steps: 25
+v_weight_decay: 0.001
+batch_size : 2000
+
+
+
+
