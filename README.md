@@ -10,7 +10,7 @@ This repository provides an implementation of Context Robust Knowledge Editing (
 2. [Context Robust Knowledge Editing (CoRE)](#context-robust-knowledge-editing-core)
 3. [CHED Dataset](#ched-dataset)
 4. [Editing and Evaluation](#editing-and-evaluation)
-5. [Experimental Results](#-experimental-results)
+5. [Experimental Results](#experimental-results)
 6. [How to Cite](#how-to-cite)
 
 ## Requirements
