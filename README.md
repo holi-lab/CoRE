@@ -225,7 +225,7 @@ When the run finishes, you’ll find a JSON file in your `save_dir` with overall
 }
 
 ```
-### Experimental Results 
+## Experimental Results 
 
 The following table presents the editing success rates of three methods — **CoRE**, **MEMIT**, and **AlphaEdit** — evaluated on 2,000 batch-edited instances from the **CHED** dataset. **SBJ\_HOP**, **OBJ\_OLD\_HOP**, **OBJ\_NEW\_HOP**, **SBJ**, **OBJ\_OLD**, and **OBJ\_NEW** represent six different types of prefix contexts in CHED.
 
