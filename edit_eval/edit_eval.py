@@ -64,7 +64,7 @@ def prepare_editing_inputs(
 
 def calculate_metrics(
     avg_metrics: Dict[str, Any],
-    results_by_type: Dict[str, Any]
+    results_by_type: Any  # Changed from Dict to Any to handle both dict and list
 ) -> Tuple[float, Dict[str, float], Dict[str, float]]:
     
     scores = [m["editing_success"] for k, m in avg_metrics.items() if k in SENTENCE_TYPES and k != "LOCALITY"]
@@ -76,8 +76,22 @@ def calculate_metrics(
         rep_metrics["AVG_SRS_REWRITE"] = float(avg_metrics["REWRITE"]["repetition_SRS"])
 
     # LOCALITY success
-    # LOCALITY success 값을 locality_success 로 가져와서 키 이름도 바꿔준다
-    loc_succ = float(results_by_type.get("LOCALITY", {}).get("locality_success", 0.0))
+    loc_succ = 0.0
+    if isinstance(results_by_type, dict):
+        # Original logic for dict format
+        locality_data = results_by_type.get("LOCALITY", {})
+        if isinstance(locality_data, dict):
+            loc_succ = float(locality_data.get("locality_success", 0.0))
+    elif isinstance(results_by_type, list):
+        # Handle list format - search for LOCALITY type in the list
+        for item in results_by_type:
+            if isinstance(item, dict) and item.get("type") == "LOCALITY":
+                loc_succ = float(item.get("locality_success", 0.0))
+                break
+    else:
+        if "LOCALITY" in avg_metrics and isinstance(avg_metrics["LOCALITY"], dict):
+            loc_succ = float(avg_metrics["LOCALITY"].get("locality_success", 0.0))
+    
     loc_metrics = {"LOCALITY/locality_success": loc_succ}
     return sentence_editing_success, rep_metrics, loc_metrics
 
