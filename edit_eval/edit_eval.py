@@ -152,17 +152,17 @@ def calculate_metrics(
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--editing_method", default="MEMIT")
-    parser.add_argument("--hparams_dir", required=True)
-    parser.add_argument("--edit_data_dir", required=True)
-    parser.add_argument("--save_dir", required=True)
-    parser.add_argument("--ds_size", type=int, default=None)
-    parser.add_argument("--start_sample", type=int, default=1)
-    parser.add_argument("--end_sample", type=int, default=None)
-    parser.add_argument("--cuda_device", default="0")
-    parser.add_argument("--eval_max_length", type=int, default=50)
-    parser.add_argument("--model_name", default="")
+    parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility.")
+    parser.add_argument("--editing_method", default="MEMIT", help="Knowledge editing method to use (e.g., MEMIT, SERAC, etc).")
+    parser.add_argument("--hparams_dir", required=True, help="Directory containing hyperparameter YAML file for the editing method.")
+    parser.add_argument("--edit_data_dir", required=True, help="Directory with input data for knowledge editing.")
+    parser.add_argument("--save_dir", required=True, help="Directory to save the edited model and metrics.")
+    parser.add_argument("--ds_size", type=int, default=None, help="Number of samples to use from the dataset. If not set, use all samples.")
+    parser.add_argument("--start_sample", type=int, default=1, help="Start index (1-based) for selecting samples from the dataset.")
+    parser.add_argument("--end_sample", type=int, default=None, help="End index (1-based) for selecting samples from the dataset. If None, goes to the end.")
+    parser.add_argument("--cuda_device", default="0", help="CUDA_VISIBLE_DEVICES assignment (e.g., '0' or '0,1').")
+    parser.add_argument("--eval_max_length", type=int, default=50, help="Maximum length for generated outputs during evaluation.")
+    parser.add_argument("--model_name", default="", help="Optional override for the model name.")
     args = parser.parse_args()
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_device
