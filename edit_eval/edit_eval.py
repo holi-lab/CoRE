@@ -201,7 +201,7 @@ def main():
     for idx, cid in enumerate(case_ids):
         metrics[idx]["case_id"] = cid
 
-
+    # save part
     save_path = generate_unique_model_path(
         save_dir=args.save_dir,
         cuda_device=args.cuda_device,
