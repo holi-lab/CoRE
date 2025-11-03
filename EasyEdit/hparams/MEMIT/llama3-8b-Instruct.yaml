@@ -18,7 +18,7 @@ mom2_dtype: float32
 mom2_n_samples: 100000
 mom2_update_weight: 15000
 rewrite_module_tmp: model.layers.{}.mlp.down_proj
-stats_dir: /data1/home/dellaanima/EasyEdit/stats
+stats_dir: /data1/home/dellaanima/EasyEdit/stats # Modify required
 v_loss_layer: 31
 v_lr: 0.5
 v_num_grad_steps: 25
