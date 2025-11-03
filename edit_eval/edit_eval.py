@@ -41,6 +41,18 @@ def load_data(
     end_idx: Optional[int],
     ds_size: Optional[int] = None
 ) -> List[Dict]:
+    """
+    Load a list of data instances from a JSON file and return a slice based on the given indices.
+    
+    Args:
+        data_path (str): Path to the JSON data file.
+        start_idx (int): Starting index for slicing the dataset.
+        end_idx (Optional[int]): Ending index for slicing the dataset. If None, takes till the end.
+        ds_size (Optional[int], optional): If specified, randomly samples this number of instances from the data.
+
+    Returns:
+        List[Dict]: A list of data dictionaries between start_idx and end_idx.
+    """
     with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     if ds_size is not None:
