@@ -28,7 +28,7 @@ batch_size : 2000
 
 
 # CORE 
-reg_lambda : 0.01 #0.04
+reg_lambda : 0.01
 context: all 
 ctx_len: 10
 ctx_num: 15
