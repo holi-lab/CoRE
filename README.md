@@ -244,6 +244,7 @@ The following table presents the editing success rates of three methods — **Co
 
 
 
+
 ## How to Cite
 
 If you use CHED or CORE, please cite the following:
