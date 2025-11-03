@@ -197,7 +197,7 @@ def main():
     )
     edit_time = time.time() - start
 
-
+    
     for idx, cid in enumerate(case_ids):
         metrics[idx]["case_id"] = cid
 
@@ -218,6 +218,7 @@ def main():
         editor.tok.save_pretrained(save_path)
         print(f"Saved model at {save_path}")
     finally:
+        # Clean GPU Memory
         del model, editor
         torch.cuda.empty_cache()
 
