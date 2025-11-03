@@ -13,6 +13,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, GenerationConfig
 
 
+# Choose the type to generate
 GENERATION_TYPES = [
     "REWRITE",
     "REPHRASE",
