@@ -299,6 +299,7 @@ def upd_matrix_match_shape(matrix: torch.Tensor, shape: torch.Size) -> torch.Ten
         )
 
 
+# Main part of context generation
 def get_context_templates(
     model,
     tok,
