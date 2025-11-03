@@ -6,7 +6,7 @@ fact_token: subject_last
 kl_factor: 0.0625
 layer_module_tmp: model.layers.{}
 layer_selection: all
-layers: [4, 5, 6, 7, 8]  # 3 
+layers: [4, 5, 6, 7, 8]
 lm_head_module: lm_head
 ln_f_module: model.norm
 mlp_module_tmp: model.layers.{}.mlp
