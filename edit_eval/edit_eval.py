@@ -93,38 +93,60 @@ def prepare_editing_inputs(
     subjects = [item["subject"] for item in edit_data]
     return case_ids, prompts, ground_truths, target_new, subjects
 
-
 def calculate_metrics(
     avg_metrics: Dict[str, Any],
     results_by_type: Any  # Changed from Dict to Any to handle both dict and list
 ) -> Tuple[float, Dict[str, float], Dict[str, float]]:
-    
+    """
+    Calculate key evaluation metrics after knowledge editing.
+
+    Args:
+        avg_metrics (Dict[str, Any]): Dictionary containing average metrics for each sentence type.
+        results_by_type (Any): Can be a dict or list containing specific detailed results by sentence type.
+
+    Returns:
+        Tuple[float, Dict[str, float], Dict[str, float]]:
+            - sentence_editing_success: Average editing success metric excluding LOCALITY
+            - rep_metrics: Dictionary with rewrite repetition SRS score (if available)
+            - loc_metrics: Dictionary with LOCALITY success metric
+    """
+
+    # Collect the 'editing_success' score for all sentence types except LOCALITY
     scores = [m["editing_success"] for k, m in avg_metrics.items() if k in SENTENCE_TYPES and k != "LOCALITY"]
+    # Calculate average sentence-level editing success (excluding LOCALITY)
     sentence_editing_success = float(np.mean(scores)) if scores else 0.0
 
-    # REWRITE repetition
+    # --- REWRITE repetition metric extraction ---
     rep_metrics = {}
+    # If REWRITE metrics include repetition_SRS, add it to rep_metrics
     if "REWRITE" in avg_metrics and "repetition_SRS" in avg_metrics["REWRITE"]:
         rep_metrics["AVG_SRS_REWRITE"] = float(avg_metrics["REWRITE"]["repetition_SRS"])
 
-    # LOCALITY success
-    loc_succ = 0.0
+    # --- LOCALITY success metric extraction ---
+    loc_succ = 0.0  # Default value if locality_success not found
+
+    # If results_by_type is a dictionary (preferred structure)
     if isinstance(results_by_type, dict):
-        # Original logic for dict format
+        # Get LOCALITY results, default to empty dict if not found
         locality_data = results_by_type.get("LOCALITY", {})
         if isinstance(locality_data, dict):
+            # Get locality_success, default to 0.0 if not found
             loc_succ = float(locality_data.get("locality_success", 0.0))
+    # If results_by_type is a list (alternative structure)
     elif isinstance(results_by_type, list):
-        # Handle list format - search for LOCALITY type in the list
+        # Search the list for a dictionary entry with type == "LOCALITY"
         for item in results_by_type:
             if isinstance(item, dict) and item.get("type") == "LOCALITY":
                 loc_succ = float(item.get("locality_success", 0.0))
                 break
+    # Fallback: try extracting from avg_metrics directly (legacy compatibility)
     else:
         if "LOCALITY" in avg_metrics and isinstance(avg_metrics["LOCALITY"], dict):
             loc_succ = float(avg_metrics["LOCALITY"].get("locality_success", 0.0))
     
+    # Prepare output dictionary for locality metrics
     loc_metrics = {"LOCALITY/locality_success": loc_succ}
+
     return sentence_editing_success, rep_metrics, loc_metrics
 
 
