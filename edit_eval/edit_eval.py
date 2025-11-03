@@ -170,7 +170,7 @@ def main():
     os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_device
     set_seed(args.seed)
 
-    # 데이터 로드
+    # Data load
     data = load_data(
         args.edit_data_dir,
         args.start_sample - 1,
@@ -179,7 +179,7 @@ def main():
     )
     case_ids, prompts, gts, tgt, subjects = prepare_editing_inputs(data)
 
-    # 편집 수행
+    # Execute Edit
     start = time.time()
     hparams_cls = EDITING_HPARAMS.get(args.editing_method)
     if not hparams_cls:
