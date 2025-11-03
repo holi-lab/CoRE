@@ -312,7 +312,7 @@ def get_context_templates(
         default_prompts = ["The", "Therefore", "Because", "I", "You"]
         num_prompts = len(default_prompts)
         
-        # 기본 할당량 계산
+        # calculate basic allocation
         base_allocation = ctx_num // num_prompts
         remainder = ctx_num % num_prompts
         
