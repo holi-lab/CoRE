@@ -156,7 +156,7 @@ def evaluate_edited_model(
     cuda_device: str = "0",
 ) -> Tuple[Dict[str, List[Dict]], Dict[str, Dict]]:
     os.environ["CUDA_VISIBLE_DEVICES"] = cuda_device
-    #os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    
 
     evaluator = TextEvaluator()
     results_by_type = defaultdict(list)
