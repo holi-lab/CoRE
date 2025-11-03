@@ -63,13 +63,33 @@ def load_data(
 def prepare_editing_inputs(
     edit_data: List[Dict]
 ) -> Tuple[List[str], List[str], List[str], List[str], List[str]]:
+    """
+    Prepare editing inputs from a list of edit data dicts.
+    Extracts required fields for the editing/evaluation pipeline.
+
+    Args:
+        edit_data (List[Dict]): List of data instances as dictionaries.
+
+    Returns:
+        Tuple[List[str], List[str], List[str], List[str], List[str]]:
+            - case_ids: list of case IDs
+            - prompts: list of prompt strings (possibly formatted with subject)
+            - ground_truths: list of ground-truth knowledge strings
+            - target_new: list of edited (target) knowledge strings
+            - subjects: list of subject strings
+    """
+    # Extract case_id from each item
     case_ids = [item["case_id"] for item in edit_data]
+    # Extract and format the prompt for each item (fill '{}' with subject if applicable)
     prompts = [
         item["prompt"].format(item["subject"]) if "{}" in item["prompt"] else item["prompt"]
         for item in edit_data
     ]
+    # Extract ground-truth (original) knowledge for each item
     ground_truths = [item["fact_knowledge"] for item in edit_data]
+    # Extract new (edited) knowledge for each item
     target_new = [item["edited_knowledge"] for item in edit_data]
+    # Extract subject from each item
     subjects = [item["subject"] for item in edit_data]
     return case_ids, prompts, ground_truths, target_new, subjects
 
