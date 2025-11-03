@@ -84,7 +84,7 @@ layer_range: 28
 ## CHED Dataset
 
 ### 📂 Dataset Preparation
-Please unzip the CHED dataset located at ./CoRE/data/CHED.zip.
+You can unzip the CHED dataset located at ./CoRE/data/CHED.zip.
 
 ### Dataset Description
 
