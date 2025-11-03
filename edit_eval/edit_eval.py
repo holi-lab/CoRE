@@ -165,6 +165,8 @@ def main():
     parser.add_argument("--model_name", default="", help="Optional override for the model name.")
     args = parser.parse_args()
 
+
+    # GPU allocation
     os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_device
     set_seed(args.seed)
 
