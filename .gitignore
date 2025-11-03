@@ -2,6 +2,6 @@ edit_eval/output/
 EasyEdit/stats/
 edit_eval/alaphedit_null/
 
-data/*
+data/*.zip
 !data/CHED.zip
 
