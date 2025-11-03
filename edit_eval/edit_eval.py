@@ -233,7 +233,7 @@ def main():
     )
     sent_succ, rep_m, loc_m = calculate_metrics(avg_m, results_by_type)
 
-
+    # Output part
     output = {"AVG_editing_success": sent_succ, "total_edit_time": edit_time, "total_samples": len(data)}
     output.update(rep_m)
     output.update(loc_m)
