@@ -1,7 +1,11 @@
+# Ignore output and cache folders from experiments and statistics
 edit_eval/output/
 EasyEdit/stats/
 edit_eval/alaphedit_null/
 
+# Ignore all zip files under data except CHED.zip (CHED is required for the dataset)
 data/*.zip
 !data/CHED.zip
 
+# This .gitignore excludes experiment outputs and large files from version control,
+# while allowing essential benchmark data (CHED.zip) to remain tracked.
