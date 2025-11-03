@@ -47,7 +47,7 @@ class COREHyperParams(HyperParams):
     batch_size: int = 1
     model_parallel: bool = False
     
-    # CORE
+    # CoRE Main hparams
     ctx_num:int = 5 
     context:str = None  
     ctx_len:int = 10
