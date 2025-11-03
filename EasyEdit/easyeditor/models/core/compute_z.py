@@ -31,6 +31,7 @@ def compute_z(
     if hparams.context is not None : 
         context_templates = get_context_templates(model, tok, request, context_type=hparams.context , n_gen=hparams.ctx_num, max_length= hparams.ctx_len, ctx_top_k= hparams.ctx_top_k)
 
+    # Out main contributed context
     print(context_templates)
 
     # Get model parameters
