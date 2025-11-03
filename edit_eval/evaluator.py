@@ -119,14 +119,27 @@ def process_evaluation_result(
 
 
 def calculate_average_metrics(metrics_by_type: Dict[str, Dict]) -> Dict[str, Dict]:
+    """
+    Calculate the average of evaluation metrics for each generation type.
+
+    Args:
+        metrics_by_type (Dict[str, Dict]): 
+            Dictionary where keys are generation types (e.g., 'REWRITE', 'LOCALITY') and 
+            values are dicts mapping metric names to lists of observed values.
+
+    Returns:
+        Dict[str, Dict]: 
+            Dictionary where each generation type maps to a dict of averaged metrics.
+    """
     avg = {}
     for gen_type, metrics in metrics_by_type.items():
         if not metrics:
-            continue
+            continue  # Skip this type if there are no metrics
         avg[gen_type] = {}
         for name, vals in metrics.items():
             if not vals:
-                continue
+                continue  # Skip this metric if no values were collected
+            # For boolean values, compute fraction of True as average (success rate)
             if isinstance(vals[0], (bool, np.bool_)):
                 avg[gen_type][name] = sum(vals) / len(vals)
             else:
