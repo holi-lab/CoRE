@@ -19,10 +19,25 @@ def load_data(
     end_idx: Optional[int],
     ds_size: Optional[int] = None
 ) -> List[Dict]:
+    """
+    Load a JSON dataset from data_path and optionally sample a subset.
+
+    Args:
+        data_path (str): Path to the JSON file.
+        start_idx (int): Start index for slicing the data.
+        end_idx (Optional[int]): End index for slicing the data (can be None).
+        ds_size (Optional[int]): Number of samples to randomly select from data. If None, use the whole dataset.
+
+    Returns:
+        List[Dict]: A list of dictionaries representing the selected dataset samples.
+    """
+    # Open the data file and load the JSON content into a list
     with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+    # If ds_size is specified, randomly sample that many items from the data (or all if ds_size > len(data))
     if ds_size is not None:
         data = random.sample(data, min(ds_size, len(data)))
+    # Return the data sliced from start_idx to end_idx (can use None for open-ended slicing)
     return data[start_idx:end_idx]
 
 
